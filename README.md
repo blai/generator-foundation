@@ -16,7 +16,7 @@ npm install generator-foundation
 
 Run `yo foundation`, optionally passing an app name:
 ```
-yo angular [app-name]
+yo foundation [app-name]
 ```
 
 Finally, install npm dependencies:
