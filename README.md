@@ -33,4 +33,5 @@ grunt
 
 
 ## Release History
+ * 2013-03-19   v0.1.1   fixed incorrect task name in watcher
  * 2013-03-12   v0.1.0   first draft.
