@@ -1,0 +1,20 @@
+Description:
+    Creates a new Zurb Foundation theme.
+
+Options:
+    css preprocessor: You can choose either Sass (the zurb foundation default), or Stylus version (noted only one set of files will be generated for you).
+    base theme: You can optionally define a base theme. A base theme is simply any theme that is based on the original zurb-foundation theme. This option allows you to reuse a base (but customized) theme template you have created.
+
+Example:
+    yo foundation [--base=my-foundation]
+
+    This will create:
+        Gruntfile.js: Configuration for the task runner.
+        package.json: Development packages installed by npm.
+        public/: The static contents, including a sample index.html
+
+        (If you choose to use Stylus version, following will also be created)
+        stylus/: The stylus files that imports foundation theme and allows customization
+
+        (If you choose to use Sass version, following will aslo be created)
+        sass/: The scss files that imports foundation theme and allows customization
