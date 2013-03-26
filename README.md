@@ -33,6 +33,7 @@ grunt
 
 
 ## Release History
+ * 2013-03-26   v0.2.1   For stylus port, import foundation-global settings after importing local setting
  * 2013-03-26   v0.2.0   Added Stylus port of foundation version
  * 2013-03-19   v0.1.1   fixed incorrect task name in watcher
  * 2013-03-12   v0.1.0   first draft.
