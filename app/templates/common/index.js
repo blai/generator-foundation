@@ -30,12 +30,21 @@ exports.version = require('./package.json').version;
  */
 exports.path = path.join(__dirname, '<%= cssPreprocessorDir %>');
 
-
 /**
  * Connect middleware
  */
 var dest = path.join(__dirname, 'dist', 'css');
 exports.middlewares = [
-  stylus.middleware({src: path.join(__dirname, '<%= cssPreprocessorDir %>'), dest: dest}),
+  stylus.middleware({
+    src: path.join(__dirname, '<%= cssPreprocessorDir %>'),
+    dest: dest,
+    compile: function(str, path) {
+      return stylus(str)
+        .set('filename', path)
+        .set('force', false)
+        .set('compress', true)
+        .use(require('<%= baseTheme %>')());
+    }
+  }),
   connect['static'](dest)
 ];
