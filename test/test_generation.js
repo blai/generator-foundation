@@ -15,7 +15,7 @@ describe('Zurb foundation generator', function () {
 			if (err) {
 				done(err);
 			}
-			foundation = helpers.createGenerator('foundation:app', ['../../app']);
+			foundation = helpers.createGenerator('foundation:app', ['../../app'], 'app');
 			done();
 		});
 	});
@@ -28,8 +28,10 @@ describe('Zurb foundation generator', function () {
 						'index.styl',
 						'index.js',
 						'stylus/app.styl',
-						'stylus/settings.styl',
-						'stylus/normalize.styl'
+						'stylus/normalize.styl',
+						'stylus/app/app-global.styl',
+						'stylus/app/environment.styl',
+						'stylus/app/settings.styl'
 						];
 
 		helpers.mockPrompt(foundation, {'cssPreprocessor': '', 'publicDir': '', 'cssPreprocessorDir': ''});

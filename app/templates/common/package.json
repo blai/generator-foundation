@@ -7,10 +7,11 @@
 	"scripts": {
 		"test": "grunt test"
 	},
-  <% if (useStylus) { %>"main": "<%= cssPreprocessorDir %>/stylus.js",<% } %>
+  <% if (useStylus) { %>"main": "index.js",<% } %>
 	"dependencies": {
-    <% if (useStylus) { %>"zurb-foundation": "https://github.com/blai/foundation/tarball/master",<% } %>
-    "connect": "~2.7.3"
+    <% if (useStylus) { %>"foundation": "~4.0.0",<% } %>
+    "connect": "~2.7.3",
+    "stylus": "~0.32.1"
   },
 	"devDependencies": {
 		"grunt": "~0.4.0",

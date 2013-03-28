@@ -39,11 +39,11 @@ exports = module.exports = function(grunt) {
                     // paths: ['path/to/import', 'another/to/import'],
                     // urlfunc: 'embedurl', // use embedurl('test.png') in our code to trigger Data URI embedding
                     use: [
-                        require('zurb-foundation') // use stylus plugin at compile time
+                        require('<%= baseTheme %>') // use stylus plugin at compile time
                     ]
                 },
                 files: {
-                    'dist/css/app.css': '<%= cssPreprocessorDir %>/app.styl',
+                    'dist/css/app.css': '<%= cssPreprocessorDir %>/<%= _.slugify(appname) %>.styl',
                     'dist/css/normalize.css': '<%= cssPreprocessorDir %>/normalize.styl'
                 }
             }

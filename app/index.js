@@ -4,7 +4,6 @@ var path = require('path');
 var generator = require('yeoman-generator');
 var util = require('util');
 
-
 var Generator = module.exports = function Generator(args, options, config) {
 	generator.Base.apply(this, arguments);
 
@@ -13,9 +12,10 @@ var Generator = module.exports = function Generator(args, options, config) {
 
 	this.option('base', {
 		type: String,
-		defaults: 'zurb-foundation',
-		banner: 'A base theme that the generated theme would used, default is "zurb-foundation"'
+		defaults: 'foundation',
+		banner: 'A base theme that the generated theme would used, default is "foundation"'
 	});
+
 	this.baseTheme = options.base;
 };
 
@@ -27,7 +27,7 @@ Generator.prototype.askForPreprocessorType = function askForPreprocessorType() {
 
 	this.prompt({
 		name: 'cssPreprocessor',
-		message: 'Which css preprocessing language would you prefer? (stylus/sass)',
+		message: 'Which css preprocessing language would you prefer? [stylus, sass]',
 		'default': 'stylus'
 	}, function(err, props) {
 		if (err) {
@@ -82,5 +82,8 @@ Generator.prototype.common = function common() {
 	if (this.useStylus) {
 		this.template('common/index.js', 'index.js');
 		this.template('common/index.styl', 'index.styl');
+		this.template('common/app.styl', path.join(this.cssPreprocessorDir, this._.slugify(this.appname) + '.styl'));
+		this.directory('common/stylus', path.join(this.cssPreprocessorDir, this._.slugify(this.appname)));
+		this.template('common/app-global.styl', path.join(this.cssPreprocessorDir, this._.slugify(this.appname), this._.slugify(this.appname) + '-global.styl'));
 	}
 };

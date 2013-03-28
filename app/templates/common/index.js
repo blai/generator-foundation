@@ -19,7 +19,7 @@ exports.path = path.join(__dirname, '<%= cssPreprocessorDir %>');
  * Connect middleware
  */
 exports.middlewares = [
-  stylus.middleware({src: __dirname, dest: path.join(__dirname, 'dist', 'css')}),
+  stylus.middleware({src: path.join(__dirname, '<%= cssPreprocessorDir %>'), dest: path.join(__dirname, 'dist', 'css')}),
   connect['static'](path.join(__dirname, '<%= publicDir %>'))
 ];
 
