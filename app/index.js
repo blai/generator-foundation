@@ -17,6 +17,15 @@ var Generator = module.exports = function Generator(args, options, config) {
 	});
 
 	this.baseTheme = options.base;
+
+	this.on('end', function () {
+		console.log([
+			'',
+			'Foundation theme "' + this.appname .bold.blue + '"" created. Now run:',
+			'1. ' + 'npm install'.bold.yellow + ' to install the required dependencies.',
+			'2. ' + 'grunt'.bold.yellow + ' to start modifying your theme.'
+		].join('\n'));
+	});
 };
 
 util.inherits(Generator, generator.Base);
