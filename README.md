@@ -36,6 +36,7 @@ grunt
 
 
 ## Release History
+ * 2013-03-28   v0.2.3   Clean up deprecated contents
  * 2013-03-27   v0.2.2   Re-factored theme-global to make themes more extensible. Use 'foundation' module from public npm.
  * 2013-03-26   v0.2.1   For stylus port, import foundation-global settings after importing local setting
  * 2013-03-26   v0.2.0   Added Stylus port of foundation version
