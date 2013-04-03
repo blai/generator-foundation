@@ -36,12 +36,12 @@ grunt
 
 
 ## Release History
- * 2013-04-02   v0.2.6   Also run "npm install" programmatically on the theme dependencies.
- * 2013-03-28   v0.2.5   Add instruction at end of project generation
- * 2013-03-28   v0.2.4   Fixed middleware bug, it did not call 'stylus.use' on the base theme
- * 2013-03-28   v0.2.3   Clean up deprecated contents
- * 2013-03-27   v0.2.2   Re-factored theme-global to make themes more extensible. Use 'foundation' module from public npm.
- * 2013-03-26   v0.2.1   For stylus port, import foundation-global settings after importing local setting
- * 2013-03-26   v0.2.0   Added Stylus port of foundation version
- * 2013-03-19   v0.1.1   fixed incorrect task name in watcher
- * 2013-03-12   v0.1.0   first draft.
+ * 2013-04-02 `v0.2.6` Also run "npm install" programmatically on the theme dependencies.
+ * 2013-03-28 `v0.2.5` Add instruction at end of project generation
+ * 2013-03-28 `v0.2.4` Fixed middleware bug, it did not call 'stylus.use' on the base theme
+ * 2013-03-28 `v0.2.3` Clean up deprecated contents
+ * 2013-03-27 `v0.2.2` Re-factored theme-global to make themes more extensible. Use 'foundation' module from public npm.
+ * 2013-03-26 `v0.2.1` For stylus port, import foundation-global settings after importing local setting
+ * 2013-03-26 `v0.2.0` Added Stylus port of foundation version
+ * 2013-03-19 `v0.1.1` fixed incorrect task name in watcher
+ * 2013-03-12 `v0.1.0` first draft.
