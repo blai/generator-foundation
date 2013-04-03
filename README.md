@@ -36,6 +36,7 @@ grunt
 
 
 ## Release History
+ * 2013-04-02   v0.2.6   Also run "npm install" programmatically on the theme dependencies.
  * 2013-03-28   v0.2.5   Add instruction at end of project generation
  * 2013-03-28   v0.2.4   Fixed middleware bug, it did not call 'stylus.use' on the base theme
  * 2013-03-28   v0.2.3   Clean up deprecated contents

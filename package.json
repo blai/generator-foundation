@@ -1,29 +1,30 @@
 {
-    "name": "generator-foundation",
-    "description": "Yeoman generator for zurb foundation CSS framework",
-    "version": "0.2.5",
-    "author": {
-        "name": "Brian Lai",
-        "email": "brian.lai.ym@gmail.com"
-    },
-    "main": "app/index.js",
-    "engines": {
-        "node": ">= 0.8.0"
-    },
-    "scripts": {
-        "test": "mocha test"
-    },
-    "devDependencies": {
-        "mocha": "~1.8.1"
-    },
-    "keywords": [
-        "yeoman-generator",
-        "yeoman",
-        "generator",
-        "zurb",
-        "foundation"
-    ],
-    "dependencies": {
-        "yeoman-generator": "~0.10.2"
-    }
+  "name": "generator-foundation",
+  "description": "Yeoman generator for zurb foundation CSS framework",
+  "version": "0.2.6",
+  "author": {
+    "name": "Brian Lai",
+    "email": "brian.lai.ym@gmail.com"
+  },
+  "main": "app/index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.1"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "yeoman",
+    "generator",
+    "zurb",
+    "foundation"
+  ],
+  "dependencies": {
+    "yeoman-generator": "~0.10.2",
+    "npm": "~1.2.16"
+  }
 }
