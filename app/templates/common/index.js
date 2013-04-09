@@ -1,8 +1,10 @@
 'use strict';
 
 var path = require('path');
-var stylus = require('stylus');
-var connect = require('connect');
+
+var packageInfo = require('./package.json');
+var libPath = path.join(__dirname, '<%= cssPreprocessorDir %>');
+var dependencies = [<%= cssDependencies.map(function(dep) { return 'require(\'' + dep + '\')'; }).join(', ') %>];
 
 
 /**
@@ -13,38 +15,40 @@ var connect = require('connect');
  */
 function plugin() {
   return function(style){
-    style.include(path.join(__dirname, '<%= cssPreprocessorDir %>'));
-    style.use(require('<%= baseTheme %>')());
+    style.include(libPath);
+    dependencies.forEach(function(dep) {
+      stylus.use(dep.call(dep));
+    });
   };
 }
 
-exports = module.exports = plugin;
+
 
 /**
- * Library version.
+ * Theme name.
  */
-exports.version = require('./package.json').version;
+exports.theme = packageInfo.name;
+
+/**
+ * Theme version.
+ */
+exports.version = packageInfo.version;
 
 /**
  * Stylus path.
  */
-exports.path = path.join(__dirname, '<%= cssPreprocessorDir %>');
+exports.path = libPath;
 
 /**
- * Connect middleware
+ * Dependent modules
+ * 
+ * @type {Array}
  */
-var dest = path.join(__dirname, 'dist', 'css');
-exports.middlewares = [
-  stylus.middleware({
-    src: path.join(__dirname, '<%= cssPreprocessorDir %>'),
-    dest: dest,
-    compile: function(str, path) {
-      return stylus(str)
-        .set('filename', path)
-        .set('force', false)
-        .set('compress', true)
-        .use(require('<%= baseTheme %>')());
-    }
-  }),
-  connect['static'](dest)
-];
+exports.dependencies = dependencies;
+
+/**
+ * Assets paths
+ * 
+ * @type {Array}
+ */
+exports.assetPaths = [path.join(__dirname, 'assets')];

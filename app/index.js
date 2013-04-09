@@ -18,6 +18,7 @@ var Generator = module.exports = function Generator(args, options, config) {
   });
 
   this.baseTheme = options.base;
+  this.cssDependencies = [this.baseTheme];
 
   this.on('end', function () {
     console.log([
@@ -87,7 +88,7 @@ Generator.prototype.common = function common() {
   this.template('common/jshintrc', '.jshintrc');
   this.template('common/Gruntfile.js', 'Gruntfile.js');
   this.template('common/package.json', 'package.json');
-  this.copy('common/README.md', 'README.md');
+  this.template('common/README.md', 'README.md');
   if (this.useStylus) {
     this.template('common/index.js', 'index.js');
     this.template('common/index.styl', 'index.styl');

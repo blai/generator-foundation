@@ -5,6 +5,8 @@
 ## The [Stylus](https://github.com/learnboost/stylus) version of Foundation!
 While Sass works great with Ruby projects, I think Stylus makes more sense for Node.js web applications for it's native modular support using npm. I spent some time creating the a [Stylus port of the Foundation framework](https://github.com/zurb/foundation/pull/2041), so for those fans of Node.js, you no longer need Ruby/Gem installed in your system to use Foundation! It is not officially adopted by Zurb yet, so if you like the idea, please help vote for it. I also published my fork of the Foundation (with Stylus port) to npm [here](https://npmjs.org/package/foundation) while Zurb is making up their mind to adopt it. Starting from v0.2.0, this generator will use the Stylus port by default (you can still choose to use Sass version from the prompt).
 
+## [fashionista](https://github.com/blai/fashionista) makes it easy to integrate custom Foundation themes with express.js
+
 
 ## Usage
 First make a new directory, and `cd` into it:
@@ -36,6 +38,7 @@ grunt
 
 
 ## Release History
+ * 2013-04-09 `v0.3.0` Integration with fashionista
  * 2013-04-02 `v0.2.6` Also run "npm install" programmatically on the theme dependencies.
  * 2013-03-28 `v0.2.5` Add instruction at end of project generation
  * 2013-03-28 `v0.2.4` Fixed middleware bug, it did not call 'stylus.use' on the base theme
