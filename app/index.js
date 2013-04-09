@@ -81,6 +81,7 @@ Generator.prototype.askForDir = function askForDir() {
 Generator.prototype.genDir = function genDir() {
   this.directory('public', this.publicDir);
   this.directory(this.cssPreprocessor, this.cssPreprocessorDir);
+  this.directory('assets', 'assets');
 };
 
 Generator.prototype.common = function common() {
