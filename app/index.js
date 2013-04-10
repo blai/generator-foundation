@@ -104,15 +104,16 @@ Generator.prototype.installBaseTheme = function installBaseTheme() {
     var self = this;
     var done = this.async();
 
-    npm.load(function (err, npm) {
+    npm.load({save: true}, function (err, npm) {
       if (err) {
-        return console.error('npm.load() failed.');
+        return console.info(err);
       }
-      console.info(err);
+      console.info(npm.config.sources.cli);
+      // npm.config(['set', 'save', true]);
       npm.commands.install([self.baseTheme], function (err, data) {
         if (err) {
           self.log.writeln('Failed to install dependencies: ' + self.baseTheme.bold.blue);
-          self.log.writeln('Please run ' + ('npm install ' + self.baseTheme).bold.yellow + ' manually to install the base theme');
+          self.log.writeln('Please run ' + ('npm install ' + self.baseTheme + ' --save').bold.yellow + ' manually to install the base theme');
         }
         done();
       });
