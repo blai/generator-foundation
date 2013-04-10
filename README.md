@@ -38,6 +38,7 @@ grunt
 
 
 ## Release History
+ * 2013-04-10 `v0.3.1` save the dependency in package.json when doing npm install
  * 2013-04-09 `v0.3.0` Integration with fashionista
  * 2013-04-02 `v0.2.6` Also run "npm install" programmatically on the theme dependencies.
  * 2013-03-28 `v0.2.5` Add instruction at end of project generation
