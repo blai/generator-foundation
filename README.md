@@ -38,6 +38,7 @@ grunt
 
 
 ## Release History
+ * 2013-04-14 `v0.3.3` Mount all asset folders from dependencies in grunt for development environment.
  * 2013-04-14 `v0.3.2` Exports plugin function from index.js
  * 2013-04-10 `v0.3.1` save the dependency in package.json when doing npm install
  * 2013-04-09 `v0.3.0` Integration with fashionista

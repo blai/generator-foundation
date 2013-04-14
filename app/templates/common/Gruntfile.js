@@ -14,7 +14,9 @@ exports = module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-open');
 	grunt.loadNpmTasks('grunt-regarde');
-	<% if (useStylus) { %>grunt.loadNpmTasks('grunt-contrib-stylus');<% } else { %>grunt.loadNpmTasks('grunt-contrib-compass');<% } %>
+	<% if (useStylus) { %>grunt.loadNpmTasks('grunt-contrib-stylus');
+
+	var themeDependencies = [<%= cssDependencies.map(function(dep) { return 'require(\'' + dep + '\')'; }).join(', ') %>];<% } else { %>grunt.loadNpmTasks('grunt-contrib-compass');<% } %>
 
 	// Project configuration.
 	grunt.initConfig({
@@ -34,7 +36,7 @@ exports = module.exports = function(grunt) {
 					compress: false,
 					// paths: ['path/to/import', 'another/to/import'],
 					// urlfunc: 'embedurl', // use embedurl('test.png') in our code to trigger Data URI embedding
-					use: [<%= cssDependencies.map(function(dep) { return 'require(\'' + dep + '\')'; }).join(', ') %>]
+					use: themeDependencies
 				},
 				files: {
 					'dist/app.css': '<%= cssPreprocessorDir %>/<%= _.slugify(appname) %>.styl',
@@ -47,7 +49,7 @@ exports = module.exports = function(grunt) {
 			dist: {
 				options: {
 					sassDir: '<%= cssPreprocessorDir %>',
-					cssDir: 'dist/css',
+					cssDir: 'dist',
 					outputStyle: 'expanded',
 					require: 'zurb-foundation'
 				}
@@ -64,12 +66,20 @@ exports = module.exports = function(grunt) {
 				options: {
 					port: 3000,
 					middleware: function(connect) {
+						<% if (useStylus) { %>var themeAssets = [];
+						themeDependencies.forEach(function(theme) {
+							theme.assetPaths.forEach(function(path) {
+								themeAssets.push(path);
+							});
+						});<% } %>
 						return [
 							lrSnippet,
 							folderMount(connect, '<%= publicDir %>'),
               folderMount(connect, 'assets'),
 							folderMount(connect, 'dist')
-						];
+						]<% if (useStylus) { %>.concat(themeAssets.map(function (assetPath) {
+							return folderMount(connect, assetPath);
+						}))<% } %>;
 					}
 				}
 			}
