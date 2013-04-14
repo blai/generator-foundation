@@ -13,11 +13,11 @@ var dependencies = [<%= cssDependencies.map(function(dep) { return 'require(\'' 
  * @return {Function}
  * @api public
  */
-function plugin() {
+exports = module.exports = function plugin() {
   return function(style){
     style.include(libPath);
     dependencies.forEach(function(dep) {
-      stylus.use(dep.call(dep));
+      style.use(dep.call(dep));
     });
   };
 }
