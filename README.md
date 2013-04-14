@@ -16,7 +16,7 @@ mkdir my-foundation && cd $_
 
 Then install `generator-foundation`:
 ```
-npm install generator-foundation
+npm install -g generator-foundation
 ```
 
 Run `yo foundation`, optionally passing an app name:
