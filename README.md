@@ -38,6 +38,7 @@ grunt
 
 
 ## Release History
+ * 2013-04-15 `v0.3.4` Check for the existence of theme.assetPaths before iterating
  * 2013-04-14 `v0.3.3` Mount all asset folders from dependencies in grunt for development environment.
  * 2013-04-14 `v0.3.2` Exports plugin function from index.js
  * 2013-04-10 `v0.3.1` save the dependency in package.json when doing npm install
