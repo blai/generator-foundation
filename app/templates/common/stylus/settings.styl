@@ -8,8 +8,8 @@
 // Grid Variables
 //
 
-// $row-width ?= 62.5em;
-// $column-gutter ?= 1.875em;
+// $row-width ?= emCalc(1000px);
+// $column-gutter ?= emCalc(30px);
 // $total-columns ?= 12;
 
 //
@@ -65,6 +65,7 @@
 // $paragraph-aside-font-size ?= emCalc(14px);
 // $paragraph-aside-line-height ?= 1.35;
 // $paragraph-aside-font-style ?= italic;
+// $paragraph-text-rendering ?= optimizeLegibility;
 
 // We use these to style <code> tags
 // $code-color ?= darken($alert-color, 15%);
@@ -84,7 +85,7 @@
 
 // We use these to style lists
 // $list-style-position ?= outside;
-// $list-side-margin ?= emCalc(18px);
+// $list-side-margin ?= emCalc(20px);
 // $definition-list-header-weight ?= bold;
 // $definition-list-header-margin-bottom ?= .3em;
 // $definition-list-margin-bottom ?= emCalc(12px);
@@ -177,6 +178,10 @@
 // $input-error-message-font-color ?= #fff;
 // $input-error-message-font-color-alt ?= #333;
 
+//
+// Button Variables
+//
+
 // We use these to build padding for buttons.
 // $button-med ?= emCalc(12px);
 // $button-tny ?= emCalc(7px);
@@ -208,9 +213,16 @@
 
 // We use this to set the default radius used throughout the core.
 // $button-radius ?= $global-radius;
+// $button-round ?= $global-rounded;
 
 // We use this to set default opacity for disabled buttons.
 // $button-disabled-opacity ?= 0.6;
+
+//
+// Button Group Variables
+//
+
+// $button-bar-margin-opposite ?= emCalc(10px);
 
 //
 // Dropdown Button Variables
@@ -223,25 +235,25 @@
 // We use these to style tiny dropdown buttons
 // $dropdown-button-padding-tny ?= $button-tny * 5;
 // $dropdown-button-pip-size-tny ?= $button-tny;
-// $dropdown-button-pip-right-tny ?= $button-tny * 2;
+// $dropdown-button-pip-opposite-tny ?= $button-tny * 2;
 // $dropdown-button-pip-top-tny ?= -($button-tny / 2) + emCalc(1px);
 
 // We use these to style small dropdown buttons
 // $dropdown-button-padding-sml ?= $button-sml * 5;
 // $dropdown-button-pip-size-sml ?= $button-sml;
-// $dropdown-button-pip-right-sml ?= $button-sml * 2;
+// $dropdown-button-pip-opposite-sml ?= $button-sml * 2;
 // $dropdown-button-pip-top-sml ?= -($button-sml / 2) + emCalc(1px);
 
 // We use these to style medium dropdown buttons
 // $dropdown-button-padding-med ?= $button-med * 4 + emCalc(3px);
 // $dropdown-button-pip-size-med ?= $button-med - emCalc(3px);
-// $dropdown-button-pip-right-med ?= $button-med * 2;
+// $dropdown-button-pip-opposite-med ?= $button-med * 2;
 // $dropdown-button-pip-top-med ?= -($button-med / 2) + emCalc(2px);
 
 // We use these to style large dropdown buttons
 // $dropdown-button-padding-lrg ?= $button-lrg * 4;
 // $dropdown-button-pip-size-lrg ?= $button-lrg - emCalc(6px);
-// $dropdown-button-pip-right-lrg ?= $button-lrg + emCalc(12px);
+// $dropdown-button-pip-opposite-lrg ?= $button-lrg + emCalc(12px);
 // $dropdown-button-pip-top-lrg ?= -($button-lrg / 2) + emCalc(3px);
 
 //
@@ -259,28 +271,28 @@
 // $split-button-span-width-tny ?= $button-tny * 6.5;
 // $split-button-pip-size-tny ?= $button-tny;
 // $split-button-pip-top-tny ?= $button-tny * 2;
-// $split-button-pip-left-tny ?= emCalc(-5px);
+// $split-button-pip-default-float-tny ?= emCalc(-5px);
 
 // We use these to control small split buttons
 // $split-button-padding-sml ?= $button-sml * 7;
 // $split-button-span-width-sml ?= $button-sml * 5;
 // $split-button-pip-size-sml ?= $button-sml;
 // $split-button-pip-top-sml ?= $button-sml * 1.5;
-// $split-button-pip-left-sml ?= emCalc(-9px);
+// $split-button-pip-default-float-sml ?= emCalc(-9px);
 
 // We use these to control medium split buttons
 // $split-button-padding-med ?= $button-med * 6.4;
 // $split-button-span-width-med ?= $button-med * 4;
 // $split-button-pip-size-med ?= $button-med - emCalc(3px);
 // $split-button-pip-top-med ?= $button-med * 1.5;
-// $split-button-pip-left-med ?= emCalc(-9px);
+// $split-button-pip-default-float-med ?= emCalc(-9px);
 
 // We use these to control large split buttons
 // $split-button-padding-lrg ?= $button-lrg * 6;
 // $split-button-span-width-lrg ?= $button-lrg * 3.75;
 // $split-button-pip-size-lrg ?= $button-lrg - emCalc(6px);
 // $split-button-pip-top-lrg ?= $button-lrg + emCalc(5px);
-// $split-button-pip-left-lrg ?= emCalc(-9px);
+// $split-button-pip-default-float-lrg ?= emCalc(-9px);
 
 //
 // Alert Variables
@@ -288,8 +300,8 @@
 
 // We use this to control alert padding.
 // $alert-padding-top ?= emCalc(11px);
-// $alert-padding-left ?= $alert-padding-top;
-// $alert-padding-right ?= $alert-padding-top + emCalc(10px);
+// $alert-padding-default-float ?= $alert-padding-top;
+// $alert-padding-opposite-direction ?= $alert-padding-top + emCalc(10px);
 // $alert-padding-bottom ?= $alert-padding-top + emCalc(1px);
 
 // We use these to control text style.
@@ -381,7 +393,7 @@
 //
 
 // We use these to control the basic form styles input styles
-// $custom-form-border-color ?= #ccc;
+// $custom-form-border-color ?= #ccc ;!default;
 // $custom-form-bg ?= #fff;
 // $custom-form-bg-disabled ?= #ddd;
 // $custom-form-check-color ?= #222;
@@ -408,11 +420,14 @@
 // $custom-dropdown-color-selected ?= #eeeeee;
 // $custom-dropdown-font-color-selected ?= #000;
 // $custom-dropdown-shadow ?= 0 2px 2px 0px rgba(0,0,0,0.1);
-// $custom-dropdown-offset-top ?= none;
+// $custom-dropdown-offset-top ?= auto;
 // $custom-dropdown-list-padding ?= emCalc(4px);
-// $custom-dropdown-left-padding ?= emCalc(6px);
-// $custom-dropdown-right-padding ?= emCalc(38px);
+// $custom-dropdown-default-float-padding ?= emCalc(6px);
+// $custom-dropdown-opposite-padding ?= emCalc(38px);
 // $custom-dropdown-list-item-min-height ?= emCalc(24px);
+// $custom-dropdown-width-small ?= 134px;
+// $custom-dropdown-width-medium ?= 254px;
+// $custom-dropdown-width-large ?= 434px;
 
 //
 // Dropdown Variables
@@ -444,7 +459,7 @@
 // $f-dropdown-list-padding ?= emCalc(5px) emCalc(10px);
 // $f-dropdown-line-height ?= emCalc(18px);
 // $f-dropdown-list-hover-bg ?= #eeeeee;
-// $dropdown-mobile-left ?= 0;
+// $dropdown-mobile-default-float ?= 0;
 
 // We use this to control the styles for when the dropdown has custom content.
 // $f-dropdown-content-padding ?= emCalc(20px);
@@ -466,8 +481,10 @@
 //
 
 // We use this to control the margins and padding of the inline list.
-// $inline-list-margin-bottom ?= emCalc(17px) emCalc(-22px );
-// $inline-list-margin ?= 0 0;
+// $inline-list-top-margin ?= 0;
+// $inline-list-opposite-margin ?= 0;
+// $inline-list-bottom-margin ?= emCalc(17px);
+// $inline-list-default-float-margin ?= emCalc(-22px);
 // $inline-list-padding ?= 0;
 
 // We use this to control the overflow of the inline list.
@@ -531,7 +548,8 @@
 // $keystroke-border-style ?= solid;
 // $keystroke-border-width ?= 1px;
 // $keystroke-border-color ?= darken($keystroke-bg, $keystroke-function-factor);
-// $keystroke-radius ?= $button-radius;
+// $keystroke-radius ?= $global-radius;
+
 
 //
 // Label Variables
@@ -539,11 +557,19 @@
 
 // We use these to style the labels
 // $label-padding ?= emCalc(3px) emCalc(10px) emCalc(4px);
-// $label-radius ?= $button-radius;
+// $label-radius ?= $global-radius;
 
 // We use these to style the label text
-// $label-font-size ?= emCalc(14px);
+// $label-font-sizing ?= emCalc(14px);
 // $label-font-weight ?= bold;
+
+//
+// Magellan Variables
+//
+//
+// $magellan-bg ?= #fff;
+// $magellan-padding ?= 10px;
+
 
 //
 // Orbit Settings
@@ -574,7 +600,7 @@
 // $orbit-slide-number-padding ?= emCalc(5px);
 
 // Margin for when Orbit is stacked on small screens
-// $stack-on-small-margin-bottom: emCalc(20px); // Doesn't quite work yet
+// $stack-on-small-margin-bottom ?= emCalc(20px);
 
 //
 // Pagination Variables
@@ -585,7 +611,7 @@
 // $pagination-margin ?= emCalc(-5px);
 
 // We use these to set the list-item properties
-// $pagination-li-float ?= $default-float;
+// $pagination-li-float = $default-float;
 // $pagination-li-height ?= emCalc(24px);
 // $pagination-li-font-color ?= #222;
 // $pagination-li-font-size ?= emCalc(14px);
@@ -690,7 +716,7 @@
 // $progress-bar-border-color ?= darken(#fff, 20%);
 // $progress-bar-border-size ?= 1px;
 // $progress-bar-border-style ?= solid;
-// $progress-bar-border-radius ?= $button-radius;
+// $progress-bar-border-radius ?= $global-radius;
 
 // We use these to control the margin & padding
 // $progress-bar-pad ?= emCalc(2px);
