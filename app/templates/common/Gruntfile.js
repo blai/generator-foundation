@@ -68,9 +68,11 @@ exports = module.exports = function(grunt) {
 					middleware: function(connect) {
 						<% if (useStylus) { %>var themeAssets = [];
 						themeDependencies.forEach(function(theme) {
-							theme.assetPaths.forEach(function(path) {
-								themeAssets.push(path);
-							});
+							if (theme.assetPaths && theme.assetPaths.length > 0) {
+								theme.assetPaths.forEach(function(path) {
+									themeAssets.push(path);
+								});
+							}
 						});<% } %>
 						return [
 							lrSnippet,
