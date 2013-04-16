@@ -1,6 +1,9 @@
 'use strict';
 
 var path = require('path');
+
+var theme = require('./index.js');
+
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
 var folderMount = function folderMount(connect, point) {
@@ -14,9 +17,7 @@ exports = module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-open');
 	grunt.loadNpmTasks('grunt-regarde');
-	<% if (useStylus) { %>grunt.loadNpmTasks('grunt-contrib-stylus');
-
-	var themeDependencies = [<%= cssDependencies.map(function(dep) { return 'require(\'' + dep + '\')'; }).join(', ') %>];<% } else { %>grunt.loadNpmTasks('grunt-contrib-compass');<% } %>
+	<% if (useStylus) { %>grunt.loadNpmTasks('grunt-contrib-stylus');<% } else { %>grunt.loadNpmTasks('grunt-contrib-compass');<% } %>
 
 	// Project configuration.
 	grunt.initConfig({
@@ -29,23 +30,20 @@ exports = module.exports = function(grunt) {
 			all: ['Gruntfile.js']
 		},
 
-		<% if (useStylus) { %>
-		stylus: {
+		<% if (useStylus) { %>stylus: {
 			compile: {
 				options: {
 					compress: false,
 					// paths: ['path/to/import', 'another/to/import'],
 					// urlfunc: 'embedurl', // use embedurl('test.png') in our code to trigger Data URI embedding
-					use: themeDependencies
+					use: theme.dependencies
 				},
 				files: {
 					'dist/app.css': '<%= cssPreprocessorDir %>/<%= _.slugify(appname) %>.styl',
 					'dist/normalize.css': '<%= cssPreprocessorDir %>/normalize.styl'
 				}
 			}
-		},
-		<% } else { %>
-		compass: {
+		},<% } else { %>compass: {
 			dist: {
 				options: {
 					sassDir: '<%= cssPreprocessorDir %>',
@@ -54,8 +52,7 @@ exports = module.exports = function(grunt) {
 					require: 'zurb-foundation'
 				}
 			}
-		},
-		<% } %>
+		},<% } %>
 
 		clean: {
 			build: ['dist']
@@ -66,20 +63,11 @@ exports = module.exports = function(grunt) {
 				options: {
 					port: 3000,
 					middleware: function(connect) {
-						<% if (useStylus) { %>var themeAssets = [];
-						themeDependencies.forEach(function(theme) {
-							if (theme.assetPaths && theme.assetPaths.length > 0) {
-								theme.assetPaths.forEach(function(path) {
-									themeAssets.push(path);
-								});
-							}
-						});<% } %>
 						return [
 							lrSnippet,
 							folderMount(connect, '<%= publicDir %>'),
-              folderMount(connect, 'assets'),
 							folderMount(connect, 'dist')
-						]<% if (useStylus) { %>.concat(themeAssets.map(function (assetPath) {
+						]<% if (useStylus) { %>.concat((theme.assetPaths || []).map(function (assetPath) {
 							return folderMount(connect, assetPath);
 						}))<% } %>;
 					}

@@ -1,7 +1,7 @@
 {
   "name": "generator-foundation",
-  "description": "Yeoman generator for zurb foundation CSS framework",
-  "version": "0.4.0",
+  "description": "Yeoman generator for Stylus themes, especially zurb foundation CSS framework",
+  "version": "0.4.1",
   "author": {
     "name": "Brian Lai",
     "email": "brian.lai.ym@gmail.com"
@@ -20,6 +20,7 @@
     "yeoman-generator",
     "yeoman",
     "generator",
+    "stylus",
     "zurb",
     "foundation"
   ],

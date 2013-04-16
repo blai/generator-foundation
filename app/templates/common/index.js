@@ -6,6 +6,19 @@ var packageInfo = require('./package.json');
 var libPath = path.join(__dirname, '<%= cssPreprocessorDir %>');
 var dependencies = [<%= cssDependencies.map(function(dep) { return 'require(\'' + dep + '\')'; }).join(', ') %>];
 
+function dependenciesAssetPaths(dependencies) {
+  var themeAssets = [];
+  if (dependencies && dependencies.length > 0) {
+    dependencies.forEach(function(theme) {
+      if (theme.assetPaths && theme.assetPaths.length > 0) {
+        theme.assetPaths.forEach(function(path) {
+          themeAssets.push(path);
+        });
+      }
+    });
+  }
+  return themeAssets;
+}
 
 /**
  * Return the plugin callback for stylus.
@@ -51,4 +64,4 @@ exports.dependencies = dependencies;
  * 
  * @type {Array}
  */
-exports.assetPaths = [path.join(__dirname, 'assets')];
+exports.assetPaths = [path.join(__dirname, 'assets')].concat(dependenciesAssetPaths(dependencies));
