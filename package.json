@@ -1,7 +1,7 @@
 {
   "name": "generator-foundation",
-  "description": "Yeoman generator for zurb foundation CSS framework",
-  "version": "0.4.0",
+  "description": "Yeoman generator for Stylus themes, especially zurb foundation CSS framework",
+  "version": "0.5.0",
   "author": {
     "name": "Brian Lai",
     "email": "brian.lai.ym@gmail.com"
@@ -11,20 +11,23 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test -t 20000 --ignore-leaks"
   },
   "devDependencies": {
-    "mocha": "~1.8.1"
+    "mocha": "~1.8.1",
+    "foundation": "~4.1.5"
   },
   "keywords": [
     "yeoman-generator",
     "yeoman",
     "generator",
+    "stylus",
     "zurb",
     "foundation"
   ],
   "dependencies": {
     "yeoman-generator": "~0.10.2",
-    "npm": "~1.2.16"
+    "npm": "~1.2.16",
+    "walker": "~1.0.3"
   }
 }

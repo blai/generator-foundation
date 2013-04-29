@@ -38,6 +38,8 @@ grunt
 
 
 ## Release History
+ * 2013-04-29 `v0.5.0` Use Foundation 4.1.5 structure, use local project override to extend inherited styles.
+ * 2013-04-15 `v0.4.1` Enhanced logic to expose assetPaths from baseTheme
  * 2013-04-15 `v0.4.0` For stylus version, updated the environment.styl and settings.styl to use the variables from Foundation 4.1.2
  * 2013-04-15 `v0.3.4` Check for the existence of theme.assetPaths before iterating
  * 2013-04-14 `v0.3.3` Mount all asset folders from dependencies in grunt for development environment.

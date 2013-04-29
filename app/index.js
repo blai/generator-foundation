@@ -1,9 +1,11 @@
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 var generator = require('yeoman-generator');
 var util = require('util');
 var npm = require('npm');
+var walker = require('walker');
 
 var Generator = module.exports = function Generator(args, options, config) {
   generator.Base.apply(this, arguments);
@@ -23,7 +25,7 @@ var Generator = module.exports = function Generator(args, options, config) {
   this.on('end', function () {
     console.log([
       '',
-      'Foundation theme "' + this.appname.bold.blue + '"" created. Now run:',
+      'Foundation theme "' + this.appname.bold.blue + '" created. Now run:',
       '1. ' + 'npm install'.bold.yellow + ' to install the required dependencies.',
       '2. ' + 'grunt'.bold.yellow + ' to start modifying your theme.'
     ].join('\n'));
@@ -38,7 +40,7 @@ Generator.prototype.askForPreprocessorType = function askForPreprocessorType() {
 
   this.prompt({
     name: 'cssPreprocessor',
-    message: 'Which css preprocessing language would you prefer? [stylus, sass]',
+    message: 'Which css preprocessing language would you prefer? stylus/sass',
     'default': 'stylus'
   }, function(err, props) {
     if (err) {
@@ -78,9 +80,8 @@ Generator.prototype.askForDir = function askForDir() {
   });
 };
 
-Generator.prototype.genDir = function genDir() {
+Generator.prototype.copyStaticDir = function copyStaticDir() {
   this.directory('public', this.publicDir);
-  this.directory(this.cssPreprocessor, this.cssPreprocessorDir);
   this.directory('assets', 'assets');
 };
 
@@ -90,33 +91,66 @@ Generator.prototype.common = function common() {
   this.template('common/Gruntfile.js', 'Gruntfile.js');
   this.template('common/package.json', 'package.json');
   this.template('common/README.md', 'README.md');
-  if (this.useStylus) {
-    this.template('common/index.js', 'index.js');
-    this.template('common/index.styl', 'index.styl');
-    this.template('common/app.styl', path.join(this.cssPreprocessorDir, this._.slugify(this.appname) + '.styl'));
-    this.directory('common/stylus', path.join(this.cssPreprocessorDir, this._.slugify(this.appname)));
-    this.template('common/app-global.styl', path.join(this.cssPreprocessorDir, this._.slugify(this.appname), this._.slugify(this.appname) + '-global.styl'));
-  }
 };
 
 Generator.prototype.installBaseTheme = function installBaseTheme() {
-	if (this.useStylus) {
+  if (this.useStylus) {
     var self = this;
     var done = this.async();
 
     npm.load({save: true}, function (err, npm) {
       if (err) {
-        return console.info(err);
+        return self.emit('error', err);
       }
-      console.info(npm.config.sources.cli);
-      // npm.config(['set', 'save', true]);
       npm.commands.install([self.baseTheme], function (err, data) {
         if (err) {
-          self.log.writeln('Failed to install dependencies: ' + self.baseTheme.bold.blue);
-          self.log.writeln('Please run ' + ('npm install ' + self.baseTheme + ' --save').bold.yellow + ' manually to install the base theme');
+          self.log.skip('Could not install base theme "' + self.baseTheme + '", please make sure it is published as an NPM module.');
+          return self.emit('error', err);
         }
         done();
       });
     });
-	}
+  }
+};
+
+Generator.prototype.generateTheme = function() {
+  var self = this;
+  var done = this.async();
+
+  if (this.useStylus) {
+    var appname = this._.slugify(this.appname);
+    this.template('common/index.js', 'index.js');
+    this.template('common/index.styl', 'index.styl');
+    this.template('stylus/app.styl', path.join(this.cssPreprocessorDir, appname + '.styl'));
+    this.template('stylus/app-components.styl', path.join(this.cssPreprocessorDir, appname + '-components.styl'));
+    this.template('stylus/app-variables.styl', path.join(this.cssPreprocessorDir, appname, 'variables.styl'));
+
+    var baseTheme = require(path.join(this.env.cwd, 'node_modules', this.baseTheme));
+    walker(baseTheme.path).on('dir', function(dir) {
+      // for each subdirectories of baseTheme's lib path, if variables.styl
+      // is found we consider it a theme component
+      var comName = path.basename(dir);
+      var comVar = path.join(dir, 'variables.styl');
+      if (fs.existsSync(comVar)) {
+        self.copy(comVar, path.join(self.cssPreprocessorDir, comName, 'variables.styl'));
+        var comComponents = path.join(dir, 'components.styl');
+        if (fs.existsSync(comComponents)) {
+          self.copy(comComponents, path.join(self.cssPreprocessorDir, comName, 'componenets.styl'));
+        }
+      }
+    }).on('end', function() {
+      var baseThemeComponents = path.join(baseTheme.path, self.baseTheme + '-components.styl');
+      console.log(baseThemeComponents);
+      if (fs.existsSync(baseThemeComponents)) {
+        self.copy(baseThemeComponents, path.join(self.cssPreprocessorDir, self.baseTheme, 'components.styl'));
+      }
+      done();
+    });
+  } else {
+    this.copy('sass/app.scss', path.join(self.cssPreprocessorDir, 'app.scss'));
+    this.remote('blai', 'foundation', function(err, remote) {
+      remote.copy('scss/foundation/_variables.scss', path.join(self.cssPreprocessorDir, '_variables.scss'));
+      done();
+    });
+  }
 };

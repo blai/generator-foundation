@@ -20,7 +20,7 @@ describe('Zurb foundation generator', function () {
 		});
 	});
 
-	it ('should generate default stylus structure with default input', function (done) {
+	it('should generate default stylus structure with default input', function (done) {
 		var expected = ['.gitignore',
 						'.jshintrc',
 						'Gruntfile.js',
@@ -28,10 +28,10 @@ describe('Zurb foundation generator', function () {
 						'index.styl',
 						'index.js',
 						'stylus/app.styl',
-						'stylus/normalize.styl',
-						'stylus/app/app-global.styl',
-						'stylus/app/environment.styl',
-						'stylus/app/settings.styl'
+						'stylus/app-components.styl',
+						'stylus/app/variables.styl',
+						'stylus/foundation/variables.styl',
+						'stylus/foundation/components.styl',
 						];
 
 		helpers.mockPrompt(foundation, {'cssPreprocessor': '', 'publicDir': '', 'cssPreprocessorDir': ''});
@@ -60,28 +60,11 @@ describe('Zurb foundation generator', function () {
 						'public/javascripts/vendor/custom.modernizr.js',
 						'public/javascripts/vendor/jquery.js',
 						'public/javascripts/vendor/zepto.js',
-						'public/index.html'
+						'public/index.html',
+						'public/css/normalize.css'
 						];
 
 		helpers.mockPrompt(foundation, {'cssPreprocessor': '', 'publicDir': '', 'cssPreprocessorDir': ''});
-
-		foundation.run({}, function() {
-			helpers.assertFiles(expected);
-			done();
-		});
-	});
-
-	it('should create sass structure with when choose to use sass', function (done) {
-		var expected = ['.gitignore',
-						'.jshintrc',
-						'Gruntfile.js',
-						'package.json',
-						'sass/_settings.scss',
-						'sass/app.scss',
-						'sass/normalize.scss'
-						];
-
-		helpers.mockPrompt(foundation, {'cssPreprocessor': 'sass', 'publicDir': '', 'cssPreprocessorDir': ''});
 
 		foundation.run({}, function() {
 			helpers.assertFiles(expected);
