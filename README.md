@@ -101,10 +101,11 @@ Feel free to comment/uncomment/change these two files to customize the default s
 ##### `assets` folder
 As mentioned above in `index.js` section, `assets` folder would be exported along with your theme files as port of the npm package. This gives you to place any none-stylus assets (e.g. font, image, etc), knowing that they will be available to you when this theme is being hosted by a node.js server. You may refer to the assets from your css/stylus files using relative path (without mentioning `assets` as part of the path) like so:
 Assuming your assets folder has this:
-
+```
 └── assets
     └── images
         └── my-background.png
+```
 
 ```css
 .my-nice-background {
